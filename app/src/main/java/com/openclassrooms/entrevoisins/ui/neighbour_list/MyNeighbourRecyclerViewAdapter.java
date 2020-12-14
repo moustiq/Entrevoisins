@@ -1,7 +1,9 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,11 +29,11 @@ import butterknife.ButterKnife;
 public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> {
 
     private final List<Neighbour> mNeighbours;
+    private Context context;
 
-
-    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items) {
+    public MyNeighbourRecyclerViewAdapter(Context context, List<Neighbour> items) {
         mNeighbours = items;
-
+        this.context = context;
     }
 
     @Override
@@ -59,6 +61,17 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
             }
         });
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, NeigbourProfilActivity.class);
+                intent.putExtra("nomUser", neighbour.getName());
+                intent.putExtra("addrsUser", neighbour.getAddress());
+                intent.putExtra("telUser", neighbour.getPhoneNumber());
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -66,7 +79,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         return mNeighbours.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_list_avatar)
         public ImageView mNeighbourAvatar;
         @BindView(R.id.item_list_name)
@@ -74,20 +87,16 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         @BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;
 
-        Context context;
-
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-            view.setOnClickListener(this);
 
         }
 
-        @Override
-        public void onClick(View view) {
 
-            Intent profil = new Intent(MyNeighbourRecyclerViewAdapter.this, NeigbourProfilActivity.class);
 
-        }
+
     }
+
+
 }
