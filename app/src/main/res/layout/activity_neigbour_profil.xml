@@ -1,95 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#ddd"
-    android:padding="15dp"
-    tools:context=".ui.neighbour_list.NeigbourProfilActivity"
-    >
-
-<android.support.v7.widget.CardView
-    android:id="@+id/card"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:elevation="5dp">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-
-        <ImageView
-            android:id="@+id/AvatarUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-    </LinearLayout>
-
-</android.support.v7.widget.CardView>
-
-<android.support.v7.widget.CardView
-    android:id="@+id/card2"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:elevation="5dp">
+    android:layout_width="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="10dp">
-
-        <TextView
-            android:id="@+id/NameUsers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="nameUser" />
-
-        <TextView
-            android:id="@+id/addreseUsers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="addrsUser" />
-
-        <TextView
-            android:id="@+id/tellUsers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="phoneUser" />
-    </LinearLayout>
-
-</android.support.v7.widget.CardView>
+        android:background="#ddd"
+        android:padding="15dp"
+        tools:context=".ui.neighbour_list.NeigbourProfilActivity"
+        >
 
     <android.support.v7.widget.CardView
-        android:id="@+id/card3"
+        android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="5dp"
-        android:layout_marginTop="10dp">
+        android:elevation="5dp">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp">
 
-            <TextView
-                android:id="@+id/appropoUsers"
+            <ImageView
+                android:id="@+id/AvatarUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="appro pro User" />
-
-        </RelativeLayout>
+                />
+        </LinearLayout>
 
     </android.support.v7.widget.CardView>
 
+    <android.support.v7.widget.CardView
+        android:id="@+id/card2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:elevation="5dp">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/NameUsers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Internal Error laoding user name" />
+
+            <TextView
+                android:id="@+id/addreseUsers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="addrsUser" />
+
+            <TextView
+                android:id="@+id/tellUsers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="phoneUser" />
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="5dp"
+            android:layout_marginTop="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/appropoUsers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="appro pro User" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+</ScrollView>
