@@ -6,33 +6,39 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
+
+import java.util.List;
 
 public class NeigbourProfilActivity extends AppCompatActivity {
+
+    private NeighbourApiService mApiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_neigbour_profil);
 
+        Button favAdd = findViewById(R.id.btn_addFavori);
+
         Intent intent = getIntent();
-
         Bundle extra = intent.getExtras();
+
         if (intent != null) {
-
-            String strName = "";
-            String straddsUsr = "";
-            String strtelUsr = "";
-            String strapprsUsr = "";
-
+            
             if (extra.containsKey("avatar")) {
-                ImageView avt = (ImageView) findViewById(R.id.AvatarUser);
                 Glide.with(this)
                         .load(intent.getStringExtra("avatar"))
                         .into((ImageView) findViewById(R.id.AvatarUser));
@@ -56,6 +62,18 @@ public class NeigbourProfilActivity extends AppCompatActivity {
 
         }
 
+        favAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //mApiService.addFavNeighbours();
+
+            }
+        });
+
+
+
     }
+
 
 }
