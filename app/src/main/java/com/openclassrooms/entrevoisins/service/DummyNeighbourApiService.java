@@ -39,7 +39,7 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
     }
 
 
-
+    @Override
     public List<Neighbour> getFavNeighbours() {
         return favVoisin;
     }
@@ -48,6 +48,7 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
         favVoisin.remove(neighbour);
     }
 
+    @Override
     public void addFavNeighbours(Neighbour neighbour) {
         favVoisin.add(neighbour);
     }

@@ -54,7 +54,9 @@
                 android:layout_height="wrap_content"
                 android:layout_row="1"
                 android:layout_column="2"
-                android:text="Button" />
+                android:text="Favori"
+                app:srcCompat="@drawable/ic_person_add_white_24dp"
+                />
 
             <TextView
                 android:id="@+id/NameUsers"

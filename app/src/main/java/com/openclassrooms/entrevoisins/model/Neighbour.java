@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Neighbour {
 
     /** Identifier */
-    private long id;
+    private int id;
 
     /** Full name */
     private String name;
@@ -31,7 +31,7 @@ public class Neighbour {
      * @param name
      * @param avatarUrl
      */
-    public Neighbour(long id, String name, String avatarUrl, String address,
+    public Neighbour(int id, String name, String avatarUrl, String address,
                      String phoneNumber, String aboutMe) {
         this.id = id;
         this.name = name;
@@ -41,12 +41,14 @@ public class Neighbour {
         this.aboutMe = aboutMe;
     }
 
-    public long getId() {
+
+
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(int id) {
+        this.id = (int) id;
     }
 
     public String getName() {
