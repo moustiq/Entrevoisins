@@ -1,38 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:orientation="vertical">
 
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="#ddd"
-        android:padding="15dp"
         tools:context=".ui.neighbour_list.NeigbourProfilActivity"
         >
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="5dp">
-
-        <LinearLayout
+        <ImageView
+            android:id="@+id/AvatarUser"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp">
-
-            <ImageView
-                android:id="@+id/AvatarUser"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-    </android.support.v7.widget.CardView>
+            android:layout_height="wrap_content"
+            />
 
     <android.support.v7.widget.CardView
         android:id="@+id/card2"
@@ -48,14 +39,15 @@
             android:columnCount="3"
             android:padding="10dp">
 
-            <Button
+            <android.support.design.widget.FloatingActionButton
                 android:id="@+id/btn_addFavori"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_row="1"
                 android:layout_column="2"
                 android:text="Favori"
-                app:srcCompat="@drawable/ic_person_add_white_24dp"
+                app:backgroundTint="@color/colorProButton"
+                app:srcCompat="@drawable/ic_star_white_24dp"
                 />
 
             <TextView
@@ -65,7 +57,9 @@
                 android:layout_row="1"
                 android:layout_column="0"
                 android:padding="10dp"
-                android:text="Internal Error laoding user name" />
+                android:text="Internal Error laoding user name"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/addreseUsers"
@@ -115,4 +109,5 @@
 
 
     </LinearLayout>
-</ScrollView>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

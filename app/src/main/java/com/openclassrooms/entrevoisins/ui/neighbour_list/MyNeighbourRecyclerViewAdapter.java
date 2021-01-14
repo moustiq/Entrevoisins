@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -26,10 +27,21 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.widget.Toast.LENGTH_SHORT;
+
 public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> {
 
     private final List<Neighbour> mNeighbours;
     private Context context;
+
+    /* creer les variable final */
+
+    static final String ID = "ID";
+    static final String AVATAR = "avatar";
+    static final String NOM_USER  = "nomUser";
+    static final String ADDRS_USER = "addrsUser";
+    static final String TEL_USER = "telUser";
+    static final String APPR_USER = "apprUser";
 
     public MyNeighbourRecyclerViewAdapter(Context context, List<Neighbour> items) {
         mNeighbours = items;
@@ -61,17 +73,19 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
             }
         });
 
+
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, NeigbourProfilActivity.class);
 
-                intent.putExtra("ID",neighbour.getId());
-                intent.putExtra("avatar", neighbour.getAvatarUrl());
-                intent.putExtra("nomUser", neighbour.getName());
-                intent.putExtra("addrsUser", neighbour.getAddress());
-                intent.putExtra("telUser", neighbour.getPhoneNumber());
-                intent.putExtra("apprUser", neighbour.getAboutMe());
+                intent.putExtra(ID ,neighbour.getId());
+                intent.putExtra(AVATAR, neighbour.getAvatarUrl());
+                intent.putExtra(NOM_USER, neighbour.getName());
+                intent.putExtra(ADDRS_USER , neighbour.getAddress());
+                intent.putExtra(TEL_USER, neighbour.getPhoneNumber());
+                intent.putExtra(APPR_USER, neighbour.getAboutMe());
                 context.startActivity(intent);
             }
         });
