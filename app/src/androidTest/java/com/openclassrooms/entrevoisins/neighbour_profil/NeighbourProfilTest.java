@@ -50,7 +50,7 @@ public class NeighbourProfilTest {
 
         onView(allOf(withId(R.id.item_list_delete_button))).perform(click());
 
-        onView(ViewMatchers.withId(R.id.list_neighbours)).perform(RecyclerViewActions.actionOnItemAtPosition(0,));
+        //onView(ViewMatchers.withId(R.id.list_neighbours)).perform(RecyclerViewActions.actionOnItemAtPosition(0,  ));
 
     }
 }
