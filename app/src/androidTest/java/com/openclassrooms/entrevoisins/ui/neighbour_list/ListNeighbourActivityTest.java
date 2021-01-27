@@ -19,18 +19,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withParent;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -41,36 +38,22 @@ public class ListNeighbourActivityTest {
 
     @Test
     public void listNeighbourActivityTest() {
-
-        onView(allOf(withId(R.id.list_neighbours), withParent(withId(R.id.container)))).perform(actionOnItemAtPosition(0, click()));
-
-        onView(withId(R.id.NameUsers)).check(matches(withText("Caroline"))); // ou isDisplayed()
-
-        pressBack();
-
-        ViewInteraction recyclerView2 = onView(allOf(withId(R.id.list_neighbours), withParent(withId(R.id.container))));
-        recyclerView2.perform(actionOnItemAtPosition(1, click()));
-
-        ViewInteraction floatingActionButton = onView(allOf(withId(R.id.btn_addFavori), childAtPosition(childAtPosition(withId(R.id.card2), 0), 0),
-                        isDisplayed()));
-        floatingActionButton.perform(click());
-
-        pressBack();
-
-        ViewInteraction tabView = onView(allOf(withContentDescription("Favorites"), childAtPosition(childAtPosition(withId(R.id.tabs), 0), 1),
-                        isDisplayed()));
+        ViewInteraction tabView = onView(allOf(withContentDescription("Favorites"), childAtPosition(childAtPosition(withId(R.id.tabs), 0), 1), isDisplayed()));
         tabView.perform(click());
 
-        ViewInteraction viewPager = onView(allOf(withId(R.id.container), childAtPosition(allOf(withId(R.id.main_content), childAtPosition(withId(android.R.id.content),
-                0)), 1), isDisplayed()));
+        ViewInteraction viewPager = onView(allOf(withId(R.id.container), childAtPosition(allOf(withId(R.id.main_content), childAtPosition(withId(android.R.id.content), 0)), 1), isDisplayed()));
         viewPager.perform(swipeLeft());
 
+        ViewInteraction recyclerView = onView(allOf(withId(R.id.favorite_recycler), childAtPosition(withClassName(is("android.widget.LinearLayout")), 0)));
+        recyclerView.perform(actionOnItemAtPosition(0, click()));
 
-
+        ViewInteraction appCompatImageButton = onView(allOf(withContentDescription("Navigate up"), childAtPosition(allOf(withId(R.id.action_bar), childAtPosition(withId(R.id.action_bar_container), 0)),
+                                1),
+                        isDisplayed()));
+        appCompatImageButton.perform(click());
     }
 
-    public static Matcher<View> childAtPosition(
-            final Matcher<View> parentMatcher, final int position) {
+    private static Matcher<View> childAtPosition(final Matcher<View> parentMatcher, final int position) {
 
         return new TypeSafeMatcher<View>() {
             @Override
