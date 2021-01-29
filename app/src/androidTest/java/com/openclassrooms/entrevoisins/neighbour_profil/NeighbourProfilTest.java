@@ -9,6 +9,7 @@ import android.view.ViewParent;
 
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
 
@@ -19,6 +20,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.List;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -28,8 +31,12 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
+import static com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator.Neighbour_FAVORI;
 import static com.openclassrooms.entrevoisins.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -50,28 +57,28 @@ public class NeighbourProfilTest {
 
     @Test
     public void listFavUser() {
+        
+        //int nbUserFav = neighbourApiService.getFavNeighbours().size();
 
-        int nbUser = neighbourApiService.getNeighbours().size();
-        int nbUserFav = neighbourApiService.getFavNeighbours().size();
+        List<Neighbour> favUserActual = neighbourApiService.getFavNeighbours();
+        List<Neighbour> favUserExpected = Neighbour_FAVORI;
 
         onView(allOf(withId(R.id.list_neighbours), withParent(withId(R.id.container)))).perform(actionOnItemAtPosition(0, click()));
         onView(withId(R.id.btn_addFavori)).perform(click());
-        nbUserFav = nbUserFav + 1;
         pressBack();
 
         onView(allOf(withId(R.id.list_neighbours), withParent(withId(R.id.container)))).perform(actionOnItemAtPosition(2, click()));
         onView(withId(R.id.btn_addFavori)).perform(click());
-        nbUserFav = nbUserFav + 1;
         pressBack();
 
         onView(allOf(withId(R.id.list_neighbours), withParent(withId(R.id.container)))).perform(actionOnItemAtPosition(5, click()));
         onView(withId(R.id.btn_addFavori)).perform(click());
-        nbUserFav = nbUserFav + 1;
         pressBack();
 
 
         onView((allOf(childAtPosition(childAtPosition(withId(R.id.tabs), 0), 1)))).perform(click());
-        onView(withId(R.id.favorite_recycler)).check(withItemCount(nbUserFav));
+
+        assertThat(favUserActual,containsInAnyOrder(favUserExpected.toArray()));
 
     }
 

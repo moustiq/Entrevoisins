@@ -1,4 +1,4 @@
-package com.openclassrooms.entrevoisins.UnitTest;
+package com.openclassrooms.entrevoisins.service;
 
 import android.content.Intent;
 
@@ -32,15 +32,6 @@ public class UnitNeighbourTest {
         neighbourApiService = DI.getNewInstanceApiService();
     }
 
-    @Test
-    public void getUserList() {
-
-        List<Neighbour> allUserActual = neighbourApiService.getNeighbours();
-        List<Neighbour> allUserExpected = DUMMY_NEIGHBOURS;
-
-        assertThat(allUserActual,containsInAnyOrder(allUserExpected.toArray()));
-
-    }
 
     @Test
     public void getFavUserList() {
@@ -52,14 +43,6 @@ public class UnitNeighbourTest {
 
     }
 
-    @Test
-    public void deleteUser() {
-
-        Neighbour deleteUser = neighbourApiService.getNeighbours().get(0);
-        neighbourApiService.deleteNeighbour(deleteUser);
-        assertFalse(neighbourApiService.getNeighbours().contains(deleteUser));
-
-    }
 
     @Test
     public void addUserFav() {
