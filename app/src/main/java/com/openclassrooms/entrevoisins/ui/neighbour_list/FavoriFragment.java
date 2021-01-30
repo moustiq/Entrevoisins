@@ -34,6 +34,10 @@ public class FavoriFragment extends Fragment {
         // Required empty public constructor
     }
 
+    // peut etre simplifie par
+    // public static Fragment newInstance() {
+    //    return new FavoriFragment();
+    // }
     public static Fragment newInstance() {
         FavoriFragment fragment = new FavoriFragment();
         return fragment;
@@ -85,6 +89,13 @@ public class FavoriFragment extends Fragment {
 
     @Subscribe
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {
+        // Ton bouton delete des favouris ne marche pas vraiment car il delete egalement
+        // le neighbour de la liste des neighbours
+        // Comme les 2 fragments existe en meme temps le fragment `NeighbourFragment` recoit egalement
+        // l'event `DeleteNeighbourEvent` et execute son action: delete le neighbour de la liste principale
+        // il faut pet etre creer 2 RecyclerViewAdapter afin que la recyclerview des favouris et son propre adapter
+        // tres similaire a celui de NeighbourFragment mais lorsque on clique sur le bouton delete un autre type
+        // d'event est emit, example: Un event DeleteFavourisEvent
         mApiService.deleteFavNeighbour(event.neighbour);
         refresh();
     }

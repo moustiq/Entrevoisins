@@ -78,6 +78,12 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Tout cela devrait etre remplace par:
+                // `EventBus.getDefault().post(new OpenProfileEvent(neighbour))`
+                // et ajoute une methode  `public void onClickNeighbour(OpenProfileEvent event)`
+                // qui execute les actions ci dessous a la classe `NeighbourFragment`
+                // inspire toi de `holder.mDeleteButton.setOnClickListener` au dessus
+                // tu devras creer une class `OpenProfileEvent` similaire a `DeleteNeighbourEvent`
                 Intent intent = new Intent(context, NeigbourProfilActivity.class);
 
                 intent.putExtra(ID ,neighbour.getId());

@@ -100,8 +100,12 @@ public class NeigbourProfilActivity extends AppCompatActivity {
            @Override
            public void onClick(View view) {
 
+               // variable en Java commence toujours par une minuscule.
                Neighbour Fneighbour = new Neighbour(voisinID,voisinName,voisinAvatar,voisinAddrs,voisinTel,voisinAppr);
 
+               //"ajouté aux favoris" serait peut etre mieux pour faire comprendre a l'utilisteur l'action qu'execute ce bouton
+               // Proposition d'amelioration (pas obligatoire pour cette soutenance): Changer la couleur ou l'icone du bouton
+               // lorsque le bouton a été cliqué au lieu de montrer un toast
                Toast.makeText(NeigbourProfilActivity.this, "click", LENGTH_SHORT).show();
                mApiService.addFavNeighbours(Fneighbour);
            }
