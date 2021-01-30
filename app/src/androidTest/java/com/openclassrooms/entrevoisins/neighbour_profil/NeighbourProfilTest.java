@@ -55,6 +55,17 @@ public class NeighbourProfilTest {
 
     }
 
+    // Ce test devrait se trouver dans la class `NeighboursListTest`
+    // tu ne test pas la bonne chose, l'ennoncé te demande
+    // "test vérifiant que l’onglet Favoris n’affiche​ ​que les neighbours marqués comme favoris."
+    // la tu verifie que le click sur favoris ajoute bien le neighbours aux favoris
+    // c'est un bon test mais il faut l'ameliorer un peu (voir commentaire en dessous) et ajouter celui
+    // qui est demandé.
+    // Pour verifier que les favoris sont bien affiché tu devrais:
+    // 1. Dans ton test unitaire grace a la methode `neighbourApiService.addFavNeighbours` ajoute des
+    // neighbours que tu creer toi meme.
+    // 2. Cliquer sur la tab favoris pour afficher les favouris
+    // 3. verifie que les nom de tes neighbours est bien affiché.
     @Test
     public void listFavUser() {
         
@@ -63,6 +74,8 @@ public class NeighbourProfilTest {
         List<Neighbour> favUserActual = neighbourApiService.getFavNeighbours();
         List<Neighbour> favUserExpected = Neighbour_FAVORI;
 
+        // Tout les `onView(allOf(withId(R.id.list_neighbours), withParent(withId(R.id.container))))`
+        // peuvent etre remplacer par `onView(withId(R.id.list_neighbours))` pour plus de simplicite
         onView(allOf(withId(R.id.list_neighbours), withParent(withId(R.id.container)))).perform(actionOnItemAtPosition(0, click()));
         onView(withId(R.id.btn_addFavori)).perform(click());
         pressBack();
@@ -78,6 +91,10 @@ public class NeighbourProfilTest {
 
         onView((allOf(childAtPosition(childAtPosition(withId(R.id.tabs), 0), 1)))).perform(click());
 
+        // tu ne verifie pas vraiment que les neighbours on bien ete ajouté.
+        // tu peux a la place:
+        // 1. avant de cliquer sur les neighbours, verifie que la taille de ta liste est egale a 1
+        // 2. apres avoir cliqué sur les 3 neighbours verifie que la taille de ta list est bien egale a 4
         assertThat(favUserActual,containsInAnyOrder(favUserExpected.toArray()));
 
     }

@@ -27,6 +27,8 @@ public class UnitNeighbourTest {
 
     private NeighbourApiService neighbourApiService;
 
+    // tous ces tests pourrait etre place dans la class `NeighbourServiceTest`
+
     @Before
     public void setup() {
         neighbourApiService = DI.getNewInstanceApiService();
@@ -61,5 +63,8 @@ public class UnitNeighbourTest {
         assertFalse(neighbourApiService.getFavNeighbours().contains(favUser));
 
     }
+
+    // proposition de test unitaire a ajouter (pour en avoir 4): verifier que `neighbourApiService.createNeighbour`
+    // ajoute bien un Neighbour a la liste des Neighbours
 
 }
