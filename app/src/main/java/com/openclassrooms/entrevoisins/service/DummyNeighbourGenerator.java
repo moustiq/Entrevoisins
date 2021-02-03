@@ -40,14 +40,14 @@ public abstract class DummyNeighbourGenerator {
         return new ArrayList<>(DUMMY_NEIGHBOURS);
     }
 
-    public static List<Neighbour>  Neighbour_FAVORI  = Arrays.asList (
+    public static List<Neighbour>  NEIGHBOUR_FAVORI  = Arrays.asList (
 
             new Neighbour(12, "Ludovic", "https://i.pravatar.cc/150?u=a042581f3e39026702d", "Saint-Pierre-du-Mont ; 5km",
                     "+33 6 86 57 90 14",  "Bonjour !Je souhaiterais faire de la marche nordique. Pas initiée, je recherche une ou plusieurs personnes susceptibles de m'accompagner !J'aime les jeux de cartes tels la belote et le tarot..")
     );
 
     public static List<Neighbour> affFavNeighbours() {
-        return new ArrayList<>(Neighbour_FAVORI );
+        return new ArrayList<>(NEIGHBOUR_FAVORI );
     }
 
 

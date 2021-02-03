@@ -11,8 +11,11 @@ import org.junit.runners.JUnit4;
 
 import java.util.List;
 
+import static com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator.NEIGHBOUR_FAVORI;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Unit test on Neighbour service
@@ -39,5 +42,34 @@ public class NeighbourServiceTest {
         Neighbour neighbourToDelete = service.getNeighbours().get(0);
         service.deleteNeighbour(neighbourToDelete);
         assertFalse(service.getNeighbours().contains(neighbourToDelete));
+    }
+
+    @Test
+    public void getFavUserList() {
+
+        List<Neighbour> favUserActual = service.getFavNeighbours();
+        List<Neighbour> favUserExpected = NEIGHBOUR_FAVORI;
+
+        assertThat(favUserActual,containsInAnyOrder(favUserExpected.toArray()));
+
+    }
+
+
+    @Test
+    public void addUserFav() {
+
+        Neighbour user = service.getNeighbours().get(0);
+        service.addFavNeighbours(user);
+        assertTrue(service.getFavNeighbours().contains(user));
+
+    }
+
+    @Test
+    public void deleteFavUser() {
+
+        Neighbour favUser = service.getFavNeighbours().get(0);
+        service.deleteFavNeighbour(favUser);
+        assertFalse(service.getFavNeighbours().contains(favUser));
+
     }
 }

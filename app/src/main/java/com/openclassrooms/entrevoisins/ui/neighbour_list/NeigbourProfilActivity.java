@@ -102,7 +102,7 @@ public class NeigbourProfilActivity extends AppCompatActivity {
 
                Neighbour Fneighbour = new Neighbour(voisinID,voisinName,voisinAvatar,voisinAddrs,voisinTel,voisinAppr);
 
-               Toast.makeText(NeigbourProfilActivity.this, "click", LENGTH_SHORT).show();
+               Toast.makeText(NeigbourProfilActivity.this, "ajouté aux favoris", LENGTH_SHORT).show();
                mApiService.addFavNeighbours(Fneighbour);
            }
         });

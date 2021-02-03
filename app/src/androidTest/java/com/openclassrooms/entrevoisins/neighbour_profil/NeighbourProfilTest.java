@@ -1,5 +1,6 @@
 package com.openclassrooms.entrevoisins.neighbour_profil;
 
+import android.support.test.espresso.ViewInteraction;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -25,16 +26,20 @@ import java.util.List;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
-import static com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator.Neighbour_FAVORI;
+import static com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator.NEIGHBOUR_FAVORI;
 import static com.openclassrooms.entrevoisins.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 
@@ -57,28 +62,37 @@ public class NeighbourProfilTest {
 
     @Test
     public void listFavUser() {
-        
-        //int nbUserFav = neighbourApiService.getFavNeighbours().size();
 
-        List<Neighbour> favUserActual = neighbourApiService.getFavNeighbours();
-        List<Neighbour> favUserExpected = Neighbour_FAVORI;
-
-        onView(allOf(withId(R.id.list_neighbours), withParent(withId(R.id.container)))).perform(actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.list_neighbours)).perform(actionOnItemAtPosition(0, click()));
         onView(withId(R.id.btn_addFavori)).perform(click());
         pressBack();
 
-        onView(allOf(withId(R.id.list_neighbours), withParent(withId(R.id.container)))).perform(actionOnItemAtPosition(2, click()));
+        onView(withId(R.id.list_neighbours)).perform(actionOnItemAtPosition(2, click()));
         onView(withId(R.id.btn_addFavori)).perform(click());
         pressBack();
 
-        onView(allOf(withId(R.id.list_neighbours), withParent(withId(R.id.container)))).perform(actionOnItemAtPosition(5, click()));
+        onView(withId(R.id.list_neighbours)).perform(actionOnItemAtPosition(5, click()));
         onView(withId(R.id.btn_addFavori)).perform(click());
         pressBack();
-
 
         onView((allOf(childAtPosition(childAtPosition(withId(R.id.tabs), 0), 1)))).perform(click());
 
-        assertThat(favUserActual,containsInAnyOrder(favUserExpected.toArray()));
+        onView(allOf(withId(R.id.container), childAtPosition(allOf(withId(R.id.main_content), childAtPosition(withId(android.R.id.content), 0)), 1), isDisplayed())).perform(swipeLeft());
+
+        onView(allOf(withId(R.id.favorite_recycler), childAtPosition(withClassName(is("android.widget.LinearLayout")), 0))).perform(actionOnItemAtPosition(0, click()));
+        onView(allOf(withId(R.id.NameUsers))).check(matches(withText("Ludovic")));
+        pressBack();
+
+        onView(allOf(withId(R.id.favorite_recycler), childAtPosition(withClassName(is("android.widget.LinearLayout")), 0))).perform(actionOnItemAtPosition(1, click()));
+        onView(allOf(withId(R.id.NameUsers))).check(matches(withText("Caroline")));
+        pressBack();
+
+        onView(allOf(withId(R.id.favorite_recycler), childAtPosition(withClassName(is("android.widget.LinearLayout")), 0))).perform(actionOnItemAtPosition(2, click()));
+        onView(allOf(withId(R.id.NameUsers))).check(matches(withText("Chloé")));
+        pressBack();
+
+        onView(allOf(withId(R.id.favorite_recycler), childAtPosition(withClassName(is("android.widget.LinearLayout")), 0))).perform(actionOnItemAtPosition(3, click()));
+        onView(allOf(withId(R.id.NameUsers))).check(matches(withText("Sylvain")));
 
     }
 
