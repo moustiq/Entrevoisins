@@ -6,5 +6,6 @@ Ce dépôt contient une mini-application pour le P3 du parcours **Grande École 
 
 - Ouvrir Android Studio
 - Sélectionné "Open an Existing projet"
-- Ouvrir le dossier "Entrevoisins-master", puis "Android" est sélectionné "Entrevoisins"
+- Ouvrir le dossier "Android" 
+- sélectionné "Entrevoisins"
 - Cliqué sur le bouton "play" dans Android Studio pour lancer l'application
