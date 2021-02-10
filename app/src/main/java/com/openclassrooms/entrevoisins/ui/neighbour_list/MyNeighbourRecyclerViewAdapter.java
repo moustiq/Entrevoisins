@@ -33,6 +33,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
     /* creer les variable final */
 
     static final String ID = "ID";
+    static final String HASHCODE = "HASHCODE";
     static final String AVATAR = "avatar";
     static final String NOM_USER  = "nomUser";
     static final String ADDRS_USER = "addrsUser";
@@ -47,9 +48,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_neighbour, parent, false);
-
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_neighbour, parent, false);
 
         return new ViewHolder(view);
     }
@@ -83,6 +82,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
                 Intent intent = new Intent(context, NeigbourProfilActivity.class);
 
                 intent.putExtra(ID ,neighbour.getId());
+                intent.putExtra(HASHCODE,neighbour.hashCode());
                 intent.putExtra(AVATAR, neighbour.getAvatarUrl());
                 intent.putExtra(NOM_USER, neighbour.getName());
                 intent.putExtra(ADDRS_USER , neighbour.getAddress());

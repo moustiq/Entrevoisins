@@ -1,44 +1,25 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
-import android.app.ActionBar;
 import android.content.Intent;
-import android.media.Image;
-import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
-import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
-import com.openclassrooms.entrevoisins.service.DummyNeighbourApiService;
-import com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
-import butterknife.OnClick;
-
-import static android.os.Build.ID;
 import static android.widget.Toast.LENGTH_SHORT;
-import static com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator.DUMMY_NEIGHBOURS;
-import static java.security.AccessController.getContext;
 
 public class NeigbourProfilActivity extends AppCompatActivity {
 
@@ -61,6 +42,7 @@ public class NeigbourProfilActivity extends AppCompatActivity {
         Bundle extra = intent.getExtras();
 
         int voisinID = intent.getIntExtra("ID", 0);
+        int voisinHashcode = intent.getIntExtra("HASHCODE", 0);
         String voisinAvatar = intent.getStringExtra("avatar");
         String voisinName = intent.getStringExtra("nomUser");
         String voisinAddrs = intent.getStringExtra("addrsUser");
@@ -100,10 +82,25 @@ public class NeigbourProfilActivity extends AppCompatActivity {
            @Override
            public void onClick(View view) {
 
+               List<Neighbour> listNeighbours = mApiService.getFavNeighbours();
+
                Neighbour Fneighbour = new Neighbour(voisinID,voisinName,voisinAvatar,voisinAddrs,voisinTel,voisinAppr);
 
-               Toast.makeText(NeigbourProfilActivity.this, "ajouté aux favoris", LENGTH_SHORT).show();
-               mApiService.addFavNeighbours(Fneighbour);
+               boolean id = true;
+
+               for (Neighbour n: listNeighbours) {
+
+                   if (n.hashCode() == voisinHashcode) {
+                       id = false;
+                   }
+               }
+               if (id) {
+                       Toast.makeText(NeigbourProfilActivity.this, "favoris ajouté", LENGTH_SHORT).show();
+                       mApiService.addFavNeighbours(Fneighbour);
+               } else {
+                       Toast.makeText(NeigbourProfilActivity.this, "favoris exist", LENGTH_SHORT).show();
+               }
+
            }
         });
         
